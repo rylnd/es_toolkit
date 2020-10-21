@@ -1,0 +1,4 @@
+es_url="${ELASTICSEARCH_URL:-http://localhost:9200}"
+es_username="${ELASTICSEARCH_USERNAME:-elastic}"
+es_password="${ELASTICSEARCH_PASSWORD:-changeme}"
+es_index="${ELASTICSEARCH_INDEX:-logs-eql_auth_demo}"

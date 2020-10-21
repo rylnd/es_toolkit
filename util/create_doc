@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+. ./util/source_env_vars
+
+doc="$1"
+if [ -z "${doc}" ]; then
+  echo "error: no document provided"
+  exit 1
+fi
+
+curl -s -k \
+  -H "Content-Type: application/json" \
+  -u "${es_username}:${es_password}" \
+  -X POST "${es_url}/${es_index}/_doc" \
+  -d"${doc}" \
+  | jq .

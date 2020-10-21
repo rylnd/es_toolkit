@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+username="${1:-default_username}"
+failure_count="${2:-3}"
+
+./create_failed_login $username $failure_count
+./create_successful_login $username 1

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+./util/delete_index
+./util/create_index

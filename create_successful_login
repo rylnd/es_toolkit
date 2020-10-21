@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+username="${1:-default_username}"
+login_count="${2:-1}"
+
+for i in $(seq 1 $login_count)
+do {
+  current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+  user_overrides=$(jq -n --arg name "$username" --arg time "$current_time" '{"@timestamp": $time, "user": {"name": $name}}')
+  success_overrides=$(jq -n '{"event": {"type": ["authentication_success", "info"], "outcome": "success"}}')
+  event=$((cat ./data/authentication.json; echo $success_overrides; echo $user_overrides) | ./util/deep_merge_json )
+
+  ./util/create_doc "$event"
+}
+done

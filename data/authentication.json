@@ -1,0 +1,120 @@
+{
+  "agent": {
+    "hostname": "instance-name",
+    "name": "instance-name",
+    "id": "aa3d9dc7-fef1-3c2f-a68d-25785d634e35",
+    "type": "filebeat",
+    "ephemeral_id": "e504bd85-1137-4bc9-ae3d-70be1d919fb7",
+    "version": "7.9.1"
+  },
+  "process": {
+    "name": "sshd",
+    "pid": 841
+  },
+  "log": {
+    "file": {
+      "path": "/var/log/auth.log"
+    },
+    "offset": 541566
+  },
+  "source": {
+    "geo": {
+      "continent_name": "Asia",
+      "region_iso_code": "CN-AH",
+      "country_iso_code": "CN",
+      "country_name": "China",
+      "region_name": "Anhui",
+      "location": {
+        "lon": 121.2865,
+        "lat": 28.8642
+      }
+    },
+    "as": {
+      "number": 4130,
+      "organization": {
+        "name": "Organization name"
+      }
+    },
+    "ip": "1.1.1.1"
+  },
+  "cloud": {
+    "availability_zone": "us-east1-b",
+    "instance": {
+      "name": "instance-name",
+      "id": "5412578377715150000"
+    },
+    "provider": "gcp",
+    "machine": {
+      "type": "n1-standard-2"
+    },
+    "project": {
+      "id": "elastic-beats"
+    }
+  },
+  "input": {
+    "type": "log"
+  },
+  "@timestamp": "2020-10-20T22:40:53.000Z",
+  "system": {
+    "auth": {
+      "ssh": {
+        "event": "Invalid"
+      }
+    }
+  },
+  "ecs": {
+    "version": "1.5.0"
+  },
+  "related": {
+    "ip": [
+      "1.1.1.1"
+    ],
+    "user": [
+      "placeholder_username"
+    ]
+  },
+  "data_stream": {
+    "namespace": "default",
+    "type": "logs",
+    "dataset": "system.auth"
+  },
+  "host": {
+    "hostname": "instance-name",
+    "os": {
+      "kernel": "4.9.0-8-amd64",
+      "codename": "stretch",
+      "name": "Debian GNU/Linux",
+      "family": "debian",
+      "version": "9 (stretch)",
+      "platform": "debian"
+    },
+    "ip": [
+      "10.142.0.7",
+      "fe80::4001:afe:fe8e:7"
+    ],
+    "name": "instance-name",
+    "id": "abc123abc123abc12abc1233",
+    "mac": [
+      "42:01:0a:8e:01:01"
+    ],
+    "architecture": "x86_64"
+  },
+  "event": {
+    "timezone": "+00:00",
+    "kind": "event",
+    "action": "ssh_login",
+    "type": [
+      "authentication_success",
+      "info"
+    ],
+    "category": [
+      "authentication"
+    ],
+    "dataset": "system.auth",
+    "outcome": "success"
+  },
+  "user": {
+    "name": "placeholder_username"
+  }
+}
+
