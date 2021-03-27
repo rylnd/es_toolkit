@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+. ./util/source_env_vars
+
+payload="$1"
+if [ -z "${payload}" ]; then
+  echo "error: no payload provided"
+  exit 1
+fi
+
+curl -s -k \
+  -H "Content-Type: application/json" \
+  -u "${es_username}:${es_password}" \
+  -X POST "${es_url}/${es_index}/_bulk" \
+  -d"${payload}" \
+  | jq .

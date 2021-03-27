@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+event_count="${1:-10}"
+host_name="${2:-host.name}"
+
+bulk_payload=""
+create='{"create": {}}'
+for i in $(seq 1 $event_count)
+do {
+  current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+  new_event=$(jq -n --arg name "$host_name" --arg time "$current_time" '{"@timestamp": $time, "host": {"name": $name}}')
+  bulk_payload+="$create\n$new_event\n"
+
+  # echo "new_event" "$user_overrides"
+  # echo -e "event" "$event"
+  # echo -e
+  # echo -e
+}
+done
+
+# echo -e "payload" "$bulk_payload"
+
+./util/bulk "$(echo -e $bulk_payload)"
