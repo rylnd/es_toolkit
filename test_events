@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+for i in $(seq 1 100)
+do {
+  (unset ELASTICSEARCH_URL ELASTICSEARCH_USERNAME ELASTICSEARCH_PASSWORD; ELASTICSEARCH_INDEX=test-events ./bulk_create_events 100 rylastic.local)
+  sleep 60
+}
+done
+
