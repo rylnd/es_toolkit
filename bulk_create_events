@@ -21,4 +21,4 @@ done
 
 # echo -e "payload" "$bulk_payload"
 
-./util/bulk "$(echo -e $bulk_payload)"
+echo -e $bulk_payload | ./util/bulk
