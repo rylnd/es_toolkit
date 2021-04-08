@@ -11,14 +11,7 @@ do {
   current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
   new_event=$(jq -n --arg name "$host_name" --arg time "$current_time" '{"@timestamp": $time, "host": {"name": $name}}')
   bulk_payload+="$create\n$new_event\n"
-
-  # echo "new_event" "$user_overrides"
-  # echo -e "event" "$event"
-  # echo -e
-  # echo -e
 }
 done
-
-# echo -e "payload" "$bulk_payload"
 
 echo -e $bulk_payload | ./util/bulk
