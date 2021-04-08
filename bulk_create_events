@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+event_count="${1:-10}"
+host_name="${2:-host.name}"
+
+bulk_payload=""
+create='{"create": {}}'
+for i in $(seq 1 $event_count)
+do {
+  current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+  new_event=$(jq -n --arg name "$host_name" --arg time "$current_time" '{"@timestamp": $time, "host": {"name": $name}}')
+  bulk_payload+="$create\n$new_event\n"
+}
+done
+
+echo -e $bulk_payload | ./util/bulk

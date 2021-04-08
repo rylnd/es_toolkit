@@ -1,6 +1,8 @@
-# EQL Demo Tools
+# ES toolkit
 
-These are a collection of scripts I whipped up to assist in demoing some upcoming EQL functionality for kibana's detections.
+These are a collection of scripts meant to generate elasticsearch documents for various situations.
+
+This was originally used to demo some upcoming EQL functionality for kibana's detections, but it's since been expanded to include various data-generation scripts.
 
 ### Requirements
 
@@ -30,6 +32,33 @@ The proceeding scripts, where relevant, respect the following environment variab
 ## Scripts Overview
 
 Note: all scripts are meant to be invoked from the root of the project.
+
+### bulk_create_events
+
+Creates N events each with a unique, current @timestamp field and a host.name as specified.
+
+```bash
+# create 10 events with a host.name of "host.name"
+./bulk_create_events
+
+# create 100 events with a host.name of "host.name"
+./bulk_create_events 100
+
+# create 20 events with a host.name of "laptop.local"
+./bulk_create_events 100 laptop.local
+```
+
+### create_random_docs
+
+Creates N events each with a unique, current @timestamp field and a random field name and value. Used to create a mapping explosion on an index with dynamic mappings
+
+```bash
+# create 10 events a random field/value: { [random()]: random() }
+./create_random_docs
+
+# create 100 events a random field/value
+./create_random_docs 100
+```
 
 ### create_suspicious_login
 
