@@ -1,6 +1,8 @@
 # ES toolkit
 
-These are a collection of scripts I whipped up to originally assist in demoing some upcoming EQL functionality for kibana's detections. It's since been expanded to include various data-generation scripts.
+These are a collection of scripts meant to generate elasticsearch documents for various situations.
+
+This was originally used to demo some upcoming EQL functionality for kibana's detections, but it's since been expanded to include various data-generation scripts.
 
 ### Requirements
 
