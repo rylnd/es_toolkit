@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+doc_count="${1:-10}"
+
+get_random_string () {
+  cat /dev/urandom | LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1 | xargs echo
+}
+
+bulk_payload=""
+create='{"create": {}}'
+for i in $(seq 1 $doc_count)
+do {
+  current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+  random_field="$(get_random_string)"
+  random_value="$(get_random_string)"
+  new_event=$(jq -n --arg field "$random_field" --arg value "$random_value" --arg time "$current_time" '{"@timestamp": $time, ($field): $value}')
+  bulk_payload+="$create\n$new_event\n"
+}
+done
+
+echo -e $bulk_payload | ./util/bulk
