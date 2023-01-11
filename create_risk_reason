@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+local_overrides="${1:-'{}'}"
+
+current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+overrides=$(jq -n --arg time "$current_time" '{"@timestamp": $time}')
+event=$((cat ./data/risk_reason.json; echo $overrides; echo $local_overrides) | ./util/deep_merge_json )
+
+echo "$event"
+# ./util/create_doc "$event"

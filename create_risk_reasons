@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+entity_count="${1:-1}"
+document_count="${2:-1}"
+
+for i in $(seq 1 $entity_count)
+do {
+  ./create_risk_reason_group $document_count
+}
+done

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+document_count="${1:-1}"
+entity_name="${2:-$(./util/get_random_string)}"
+
+for i in $(seq 1 $document_count)
+do {
+  current_time="${3:-$(gdate -u +%FT%T.%3NZ)}"
+  risk_score=$(((RANDOM % 100) + 1))
+  overrides=$(jq -n --arg name "$entity_name" --arg time "$current_time" --argjson score $risk_score '{"@timestamp": $time, "user": {"name": $name}, "risk": {"score": $score}}')
+
+  ./create_risk_reason "$overrides"
+}
+done

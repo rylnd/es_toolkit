@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+entity_count="${1:-1}"
+document_count="${2:-1}"
+
+bulk_payload=""
+create='{"create": {}}'
+
+for i in $(seq 1 $entity_count)
+do {
+  entity_name="$(./util/get_random_string)"
+
+  for j in $(seq 1 $document_count)
+  do {
+    risk_score=$(((RANDOM % 100) + 1))
+    overrides=$(jq -n --arg name "$entity_name" --argjson score $risk_score '{"user": {"name": $name}, "risk": {"score": $score}}')
+    new_event=$(./build_risk_reason "$overrides")
+    bulk_payload+="$create\n$new_event\n"
+  }
+  done
+}
+done
+
+echo -e $bulk_payload | ./util/bulk
