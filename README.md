@@ -108,3 +108,21 @@ Simulates a successful login attempt by sequentially generating n successful log
 ### rebuild_index
 
 First attempts to delete, then rebuild the index specified by `$ELASTICSEARCH_INDEX` with the mappings in ./data/mappings.json. Leverages the utility scripts `delete_index` and `create_index` under the hood.
+
+
+### create_risk_reason
+
+Generates a Risk Reason document with the specified user.name and risk.score values. A current @timestamp is used.
+
+```bash
+./create_risk_reason '{"user.name": "foo", "risk.score": 20}'
+```
+
+### create_risk_reasons
+
+Generates groups of Risk Reason documents. N documents for M entities are created with random risk scores and current values.
+
+```bash
+# creates 10 documents for each of 5 random entities.
+./create_risk_reasons 5 10
+```

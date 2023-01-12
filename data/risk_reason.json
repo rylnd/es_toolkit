@@ -1,0 +1,12 @@
+{
+  "event": {
+    "category": "risk",
+    "type": "reason"
+  },
+  "risk": {
+    "category": "default_category",
+    "message": "this describes the default risk category",
+    "prevalence": 1,
+    "score": 30
+  }
+}

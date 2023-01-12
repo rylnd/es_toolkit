@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+. ./util/source_env_vars
+
+curl -s -k \
+  -H "Content-Type: application/json" \
+  -u "${es_username}:${es_password}" \
+  -X PUT "${es_url}/${es_index}" \
+  --data-binary @./data/reason_mappings.json \
+  | jq .
